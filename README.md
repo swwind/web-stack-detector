@@ -101,6 +101,7 @@ about a page than the **UI library** underneath it, which says more than the
 | | Recognised by | Version |
 | --- | --- | --- |
 | **Next.js** | `window.next`, `__NEXT_DATA__`, `self.__next_f`, `/_next/static/`, the `webpackChunk_N_E` registry | **exact**, off `window.next.version` |
+| **Fresh** | Fresh 1's `/_frsh/` runtime assets and `__FRSH_STATE`; Fresh 2's `f-client-nav` / `f-partial` attributes | `≤ 1` or `≥ 2`, from the runtime marker |
 | **Nuxt** | `useNuxtApp`, `__NUXT__`, `__buildAssetsURL`, `/_nuxt/` | none |
 | **SvelteKit** | `__sveltekit_…`, `/_app/immutable/`, `data-sveltekit-preload-data` | none |
 | **Astro** | `<astro-island>` and its runtime, `astro:page-load`, `/_astro/`, `data-astro-cid-…` | **exact** from the generator meta tag |
@@ -187,10 +188,10 @@ property called `version`, being reported as a release.
 
 ### Absorbed evidence
 
-Next.js *is* React and ships webpack or Turbopack. Reporting all three as
-separate findings would be technically true and useless, so a meta-framework
-absorbs what is intrinsic to it and the popup shows those traces as chips under
-the card, evidence and all.
+Next.js *is* React and ships webpack or Turbopack; Fresh is built on Preact.
+Reporting those implementation details as separate findings would be technically
+true and useless, so a meta-framework absorbs what is intrinsic to it and the
+popup shows those traces as chips under the card, evidence and all.
 
 Only intrinsic relationships are folded in. React on webpack is a *choice*, not
 a fact about React, so those stay two findings — and Astro keeps its islands
@@ -332,6 +333,7 @@ Every icon is the project's own artwork.
 | rspack | the site favicon, `https://assets.rspack.rs/rspack/favicon-128x128.png` |
 | turbopack | the Turbo mark from the [vercel/turborepo](https://github.com/vercel/turborepo) README |
 | astro | the mark from `https://astro.build/favicon.svg` |
+| fresh | the [official Fresh SVG](https://github.com/freshframework/fresh/blob/main/www/static/logo.svg) |
 | knockout | the [Knockout organisation](https://github.com/knockout) avatar on GitHub — the same script K as their favicon, at 460 px instead of 16 |
 | sveltekit | the Svelte mark, which is SvelteKit's own branding too — the toolbar cannot tell the two apart, the popup can |
 
