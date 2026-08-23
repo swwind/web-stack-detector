@@ -1,0 +1,7 @@
+{
+  "markup": "<!doctype html><html><head><link rel=\"modulepreload\" href=\"/_frsh/js/8da4be105acc5e866d96dbd1367699fea082142b/main.js\"></head><body><!--frsh-counter:0--><div><button>+1</button></div><!--/frsh-counter:0--><script id=\"__FRSH_STATE\" type=\"application/json\">{\"v\":[]}</script></body></html>",
+  "dom": "script#__FRSH_STATE\nlink[href=\"/_frsh/js/8da4be105acc5e866d96dbd1367699fea082142b/main.js\"]",
+  "props": [],
+  "urls": ["https://example.test/_frsh/js/8da4be105acc5e866d96dbd1367699fea082142b/main.js"],
+  "globals": []
+}

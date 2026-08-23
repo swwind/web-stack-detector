@@ -18,6 +18,46 @@
 
   list.push(
     {
+      id: 'fresh',
+      name: 'Fresh',
+      category: 'meta-framework',
+      color: '#f7c948',
+      home: 'https://usefresh.dev',
+      rules: [
+        // Fresh 1 serves its client runtime and island chunks from this
+        // reserved directory. seen: Fresh 1 documentation and starter output
+        {
+          id: 'fresh1-asset-url',
+          where: ['url', 'html'],
+          re: /\/_frsh\/(?:js\/|refresh\.js)/,
+          weight: STRONG,
+          max: 1,
+          desc: '/_frsh/ Fresh 1 runtime asset directory',
+        },
+        // Fresh 1 serializes island props into this uniquely named script.
+        // seen: Fresh 1 counter starter output
+        {
+          id: 'fresh1-state',
+          where: ['dom', 'html'],
+          str: '__FRSH_STATE',
+          weight: STRONG,
+          max: 1,
+          desc: '__FRSH_STATE island hydration payload (Fresh 1)',
+        },
+        // Fresh 2's built-in partial navigation is expressed directly in
+        // markup, including on the framework's own site. seen: usefresh.dev
+        {
+          id: 'fresh2-navigation-attrs',
+          where: ['dom', 'html'],
+          re: /\bf-(?:client-nav|partial|partial-mode|partial-target)\b/,
+          weight: STRONG,
+          min: 2,
+          desc: 'f-client-nav / f-partial Fresh 2 navigation attribute',
+        },
+      ],
+    },
+
+    {
       id: 'next',
       name: 'Next.js',
       category: 'meta-framework',
@@ -498,6 +538,11 @@
    * finding and stays its own card.
    */
   relations.push(
+    {
+      id: 'fresh',
+      builtOn: ['preact'],
+      note: 'Fresh is built on Preact, so Preact runtime markers are attributed to Fresh.',
+    },
     {
       id: 'next',
       builtOn: ['react', 'turbopack', 'webpack'],

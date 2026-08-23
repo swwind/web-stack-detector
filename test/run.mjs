@@ -90,6 +90,9 @@ const CASES = [
   { dir: 'knockout', primary: 'knockout', version: '3.5.3', also: ['jquery'], only: true },
   { dir: 'ember', primary: 'ember', version: null, also: ['webpack'], only: true },
   { dir: 'stimulus', primary: 'stimulus', version: null, only: true },
+  // Fresh 1's island state and runtime asset path are server-rendered page
+  // markers; Preact, when present, is intrinsic and gets folded in.
+  { dir: 'fresh', primary: 'fresh', version: '≤ 1', only: true },
 
   // ---- meta-frameworks ------------------------------------------------
   // The UI framework and the bundler are intrinsic to each of these, so they
@@ -248,6 +251,23 @@ describe('signature engine', () => {
     const dom = ['data-action="delete"', 'data-action="click:menu#toggle"', 'data-remote="true"'].join('\n');
     const { detections } = analyze({ sources: [{ kind: 'dom', label: 'page DOM', text: dom }], globals: [] });
     assert.deepStrictEqual(detections.map((d) => d.id), []);
+  });
+
+  it('unrelated f-prefixed attributes are not Fresh', () => {
+    const { detections } = analyze({
+      sources: [{ kind: 'dom', label: 'page DOM', text: '<form f-action="save" f-state="dirty">' }],
+      globals: [],
+    });
+    assert.deepStrictEqual(detections.map((d) => d.id), []);
+  });
+
+  it('Fresh 2 navigation attributes', () => {
+    const { detections } = analyze({
+      sources: [{ kind: 'dom', label: 'page DOM', text: '<main f-client-nav><button f-partial="/recipes/lemonade">' }],
+      globals: [],
+    });
+    assert.deepStrictEqual(detections.map((d) => d.id), ['fresh']);
+    assert.strictEqual(detections[0].version.text, '≥ 2');
   });
 
   // window globals alone should be enough, with no script bodies at all.
