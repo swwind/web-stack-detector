@@ -1,6 +1,6 @@
 {
   "name": "web-stack-detector",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "license": "MIT",
   "description": "Browser extension that detects the frontend framework and bundler behind the current site",
